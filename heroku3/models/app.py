@@ -516,6 +516,13 @@ class App(BaseResource):
        item = self._h._resource_deserialize(r.content.decode("utf-8"))
        return Release.new_from_dict(item, h=self._h, app=self)
 
+    def release(self, version):
+        """One release for this app."""
+        return self._h._get_resource(
+            ('apps/{0:s}/releases/{1:s}'.format(self.name, str(version))),
+            Release,
+        )
+
     def releases(self, **kwargs):
         """The releases for this app."""
         return self._h._get_resources(
@@ -551,7 +558,7 @@ class App(BaseResource):
 
     def slug(self, slug_id):
         """Get a slug by id."""
-        return self._h._get_resources(
+        return self._h._get_resource(
             resource=('apps', self.name, 'slugs', slug_id),
             obj=Slug, app=self,
         )
