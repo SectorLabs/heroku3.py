@@ -6,6 +6,7 @@ class Release(BaseResource):
     _strs = ['description', 'id', 'user', 'commit', 'addons']
     _ints = ['version']
     _dates = ['created_at', 'updated_at']
+    _bools = ['current']
     _map = {'slug': Slug, 'user': User}
     _pks = ['id', 'version']
     order_by = 'version'
